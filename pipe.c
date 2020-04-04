@@ -18,7 +18,7 @@ printf("pipe create error ");
 return -1;
 }
 	if((pid=fork())==0){
-	printf(" ...\n");
+	printf(" 子进程正在执行\n");
 	close(pipe_fd[1]);
 	sleep(3);//确保子进程关闭写端
 	r_num=read(pipe_fd[0],r_buf,100);
@@ -27,6 +27,7 @@ return -1;
 	exit();
 	}
 	else if(pid>0){
+	printf(" 主进程正在执行\n");
 	close(pipe_fd[0]);//read
 	strcpy(w_buf,"111");
 	if(write(pipe_fd[1],w_buf,4)!=(-1))
